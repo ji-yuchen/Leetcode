@@ -1,6 +1,6 @@
 #include<vector>
 #include <stdlib.h>
-using namespace std;
+using std::vector;
 
 class Solution {
 public:
