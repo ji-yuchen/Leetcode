@@ -4,7 +4,7 @@
 using std::vector;
 using std::sort;
 
-//Time complexity : \mathcal{O}(nlgn)O(nlgn)
+//Time complexity : O(nlgn)
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
@@ -14,7 +14,7 @@ public:
 };
 
 
-//Time complexity : \mathcal{O}(n)O(n)
+//Time complexity : O(n)
 /*
 class Solution {
 public:
