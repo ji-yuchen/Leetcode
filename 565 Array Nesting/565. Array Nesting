@@ -1,0 +1,36 @@
+#include <vector>
+#include <algorithm>
+using std::vector;
+using std::max;
+
+class Solution {
+public:
+    int arrayNesting(vector<int>& nums) {
+        int ret = 0;
+        int N = nums.size();
+        int visited_value = 20001;
+        int count = 0;
+        
+        for(int i =0; i < N; i++)
+        {
+            if(nums[i] != visited_value)
+            {
+                int start = nums[i];
+                count = 0;
+                
+                while(nums[start] != visited_value)
+               {
+                    int temp = start;
+                    start = nums[start];
+                    nums[temp] = visited_value;
+                    count++;
+                }
+                ret = max(count, ret);
+            
+            }
+           
+        }
+        return ret;
+        
+    }
+};
