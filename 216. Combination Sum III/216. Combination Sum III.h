@@ -26,7 +26,7 @@ public:
     }
     
     void backtrack(vector<vector<int>> &result, vector<int> &path, int start, int k, int n){
-        if(k==0)
+        if(k==0)//k numbers have been pushbacked into the vector, it's the time to judge hahahaha. if (n-sum(path))==0, the path vector is what we want.
         {
             if(n==0)
                 result.push_back(path);
