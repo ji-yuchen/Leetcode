@@ -10,6 +10,8 @@ Find the minimum element.
 You may assume no duplicate exists in the array.
 
 It's a classical problem which i feel funny doing with.
+
+Time complexity: O(logN) ; Space complexity: O(1)
 */
 
 #include <vector>
