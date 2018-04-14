@@ -41,3 +41,23 @@ public:
         return nums[end];                
     }
 };
+
+//https://blog.csdn.net/feliciafay/article/details/42962131
+//maybe I prefer this method=.= It's more clear.
+int findMin(vector<int> &num) {  
+    int start = 0, end = num.size() - 1, mid = 0;  
+    while (start < end) {   
+        while (start < end && num[start] == num[end]) //滤重，本题最重要的地方！  
+            ++start;   
+        mid  = start + (end - start)/2;  
+        if (num[start] <= num[mid] && num[mid] <= num[end]) //如果是正常的升序数组  
+            return num[start];  
+        if (num[start] > num[mid]) { //和Find Minimum in Rotated Sorted Array I类似的逻辑  
+            end = mid;  
+        } else if (num[mid] > num[end]) { //和Find Minimum in Rotated Sorted Array I类似的逻辑  
+            start = mid + 1;  
+        }  
+    }  
+    return num[start] < num[end] ? num[start] : num[end]; //化简到最后，可能是1个元素或者2个元素。  
+    }  
+};  
