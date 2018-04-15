@@ -27,10 +27,16 @@ Different words in paragraph are always separated by a space.
 There are no hyphens or hyphenated words.
 Words only consist of letters, never apostrophes or other punctuation symbols.
 
-
-
 */
+//First filter the punctions
+//Second change Uppercase to Lowercase
+//Then search and accumulate unbanned words.
 
+
+#include <unordered_map>
+#include <unordered_set>
+using std::unordered_map;
+using std::unordered_set;
 
 
 
@@ -38,17 +44,28 @@ class Solution {
 public:
     string mostCommonWord(string paragraph, vector<string>& banned) {
         int gap = 0;
-        map<string, int> QAQ;
+        unordered_map<string, int> QAQ;
         int max_num = 0;
         string res;
+        unordered_set<char> punc = {'!',';',',','?','.','\''};
+        
+        //I learned this easy erase_punciton way from https://leetcode.com/problems/most-common-word/discuss/123822/C++-Simple-Solution
+        auto is_punc = [&punc](char c){return punc.count(c);};
+        paragraph.erase (remove_if (paragraph.begin (), paragraph.end (), is_punc), paragraph.end ());
+        
+        for(auto& c:paragraph) c = tolower(c);
+        if(paragraph[paragraph.size()-1] != ' ') 
+            paragraph += ' ';
+
         for(int i = 0; i < paragraph.size(); ++i){
-            if(paragraph[i] == ' '){
+            if(paragraph[i] == ' ' || i == paragraph.size()-1){
                 string tmp(paragraph, gap, i-gap);
                 if(find(banned.begin(), banned.end(),tmp) == banned.end()){
                     ++QAQ[tmp];
                     if(max_num < QAQ[tmp]){
                         max_num = QAQ[tmp];
                         res = tmp;
+
                     }
                     
                 }
