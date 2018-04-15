@@ -27,7 +27,12 @@ Different words in paragraph are always separated by a space.
 There are no hyphens or hyphenated words.
 Words only consist of letters, never apostrophes or other punctuation symbols.
 
+More easy solution:
+https://leetcode.com/problems/most-common-word/discuss/123854/C++JavaPython-Easy-Solution-with-Explanation
+throw paragragh into an istringstream.....
+
 */
+
 //First filter the punctions
 //Second change Uppercase to Lowercase
 //Then search and accumulate unbanned words.
