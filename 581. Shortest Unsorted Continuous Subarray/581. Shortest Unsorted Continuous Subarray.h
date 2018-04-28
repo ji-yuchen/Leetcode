@@ -73,3 +73,24 @@ public:
         
     }
 };
+//Then, it's more clear=.= amazing!
+//https://leetcode.com/problems/shortest-unsorted-continuous-subarray/discuss/103066/Ideas-behind-the-O(n)-two-pass-and-one-pass-solutions
+class Solution {
+public:
+    int findUnsortedSubarray(vector<int>& nums) {
+        int local_max = INT_MIN;
+        int local_min = INT_MAX;
+        int start = 0;
+        int end = -1;
+        for(int l = 0, r = nums.size() - 1; r>=0; ++l,--r){
+            local_max = max(local_max, nums[l]);
+            if(nums[l] != local_max)
+                end = l;
+            local_min = min(local_min, nums[r]);
+            if(nums[r] != local_min)
+                start = r;
+        }
+        return end - start + 1;
+        
+    }
+};
