@@ -15,7 +15,7 @@ Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
 */
 //At first I tried merge the new interval on the original intervals, which is more complex than new a result vector=.=
 //However, the latter is much easier to code =.= Thanks to the high performance of "push_back", the latter one is also fast.lol
-
+//Time complexity: O(N); Space complexity: O(N)
 
 /**
  * Definition for an interval.
