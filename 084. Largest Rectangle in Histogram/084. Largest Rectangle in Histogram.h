@@ -22,7 +22,6 @@ public:
                 tmp.pop_back();
                 int idx = tmp.size() > 0? tmp.back():-1;                
                 res = max(res, h*(i-idx-1));
-                cout<<"size: "<<h*(i-idx-1)<<endl;
             }
             tmp.push_back(i);
         }
