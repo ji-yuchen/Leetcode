@@ -1,0 +1,123 @@
+/*
+https://leetcode.com/problems/zigzag-conversion/description/
+The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
+P   A   H   N
+A P L S I I G
+Y   I   R
+And then read line by line: "PAHNAPLSIIGYIR"
+
+Write the code that will take a string and make this conversion given a number of rows:
+string convert(string s, int numRows);
+
+Example 1:
+Input: s = "PAYPALISHIRING", numRows = 3
+Output: "PAHNAPLSIIGYIR"
+
+Example 2:
+Input: s = "PAYPALISHIRING", numRows = 4
+Output: "PINALSIGYAHRPI"
+
+Explanation:
+P     I    N
+A   L S  I G
+Y A   H R
+P     I
+*/
+
+//My fisrt solution, writing down each char at where it should be. At last, search each row and add the char to the result string.
+//Time complexity: O(NM); Space compelxity: O(NM). N means the size of string s, while M equals numRows.
+#include <string>
+#include <vector>
+using std::string;
+using std::string;
+
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        int n = s.size();
+        int Row = numRows;
+        if(numRows <= 1)
+            return s;
+        int Col = (n/(2*Row-2)+1)*(Row-1);
+        vector<vector<char>> ress(Row, vector<char>(Col, '#'));
+        int idx = 0;
+        while(idx < n){            
+            godown(ress, s, idx);
+            gozig(ress, s, idx);
+        }
+        string res = "";
+        for(int i = 0; i < Row; ++i){
+            for(int j = 0; j < Col; ++j){
+                if(ress[i][j]!='#')
+                    res += ress[i][j];
+            }
+        }
+        return res;
+        
+    }
+private:
+    void godown(vector<vector<char>>& ress, const string& s, int& idx){
+        int Row = ress.size();
+        int col = idx/(2*Row-2)*(Row-1);
+        for(int i = 0; i < Row-1; ++i){
+            if(idx == s.size())
+                break;
+            ress[i][col] = s[idx];
+            ++idx;
+        }
+    }
+    void gozig(vector<vector<char>>& ress, const string& s, int& idx){
+        int Row = ress.size();
+        int col = idx/(2*Row-2)*(Row-1);
+        for(int i = Row-1; i>0; --i){
+            if(idx == s.size())
+                break;
+            ress[i][col] = s[idx];
+            ++idx;
+            ++col;
+        }
+    }
+};
+
+/*
+n=numRows
+Δ=2n-2    1                           2n-1                         4n-3
+Δ=        2                     2n-2  2n                    4n-4   4n-2
+Δ=        3               2n-3        2n+1              4n-5       .
+Δ=        .           .               .               .            .
+Δ=        .       n+2                 .           3n               .
+Δ=        n-1 n+1                     3n-3    3n-1                 5n-5
+Δ=2n-2    n                           3n-2                         5n-4
+*/
+//We can also directly write the char into the result string by finding the rule above. =o=
+//Time complexity: O(N); Space complexity: O(1)
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        string result="";
+        if(numRows==1)
+			return s;
+        int step1,step2;
+        int len=s.size();
+        for(int i=0;i<numRows;++i){
+            step1=(numRows-i-1)*2;
+            step2=(i)*2;
+            int pos=i;
+            if(pos<len)
+                result+=s.at(pos);
+            while(1){
+                pos+=step1;
+                if(pos>=len)
+                    break;
+				        if(step1)
+					          result+=s.at(pos);
+                pos+=step2;
+                if(pos>=len)
+                    break;
+				        if(step2)
+					          result+=s.at(pos);
+            }
+        }
+        return result;
+    }
+};
