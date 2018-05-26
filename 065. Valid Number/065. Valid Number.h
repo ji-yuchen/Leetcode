@@ -14,7 +14,6 @@ Update (2015-02-10):
 The signature of the C++ function had been updated. If you still see your function signature accepts a const char * argument, please click the reload button to reset your code definition.
 */
 #include <string>
-using std::string
 class Solution {
 public:
     bool isNumber(string s) {
@@ -43,7 +42,7 @@ public:
         }
         // skip the trailing whitespaces
         for(; s[i] == ' '; i++) {}
-    
-        return s[i]==0;  // must reach the ending 0 of the string
+        
+        return i==s.size();  // must reach the ending of the string
     }
 };
