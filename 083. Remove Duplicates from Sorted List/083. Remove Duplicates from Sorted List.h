@@ -31,3 +31,34 @@ public:
         return head;
     }
 };
+
+//IF THIS LIST IS UNSORTED!!!!!!!!
+//USE A HASH MAP TO RECORD NUMBER MET
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(!head || !head->next)return head;
+        ListNode* res = head;
+        unordered_set<int> tmp;
+        tmp.insert(head->val);        
+        while(head->next != NULL){
+            if(tmp.find(head->next->val) == tmp.end()){
+                tmp.insert(head->next->val);
+                head = head->next;
+            }else{
+                head->next = head->next->next;
+            }
+            
+        }
+        return res;
+        
+    }
+};
