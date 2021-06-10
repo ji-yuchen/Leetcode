@@ -1,0 +1,81 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+/*
+Iterative solution using stack --- O(n) time and O(n) space;
+Recursive solution --- O(n) time and O(n) space (function call stack);
+Morris traversal --- O(n) time and O(1) space.
+*/
+
+/*Recursive*/
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> result;
+        preorder(root, result);
+        return result;
+    }
+private:
+    void preorder(TreeNode* root, vector<int>& result){
+        if(!root)
+            return;
+        result.push_back(root->val);
+        preorder(root->left, result);
+        preorder(root->right, result);
+    }
+};
+/*Iterative*/
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> result;
+        stack<TreeNode*> todo;
+        while(root || !todo.empty()){
+            if(root){
+                result.push_back(root->val);
+                if(root->right)
+                    todo.push(root->right);
+                root = root->left;
+            }else{
+                root = todo.top();
+                todo.pop();
+            }            
+        }
+        return result;
+    }
+};
+/*Morris*/
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> result;
+        while (root) {
+            if (root -> left) {
+                TreeNode* pre = root -> left;
+                while (pre -> right && pre -> right != root) {
+                    pre = pre -> right;
+                }
+                if (!pre -> right) {
+                    pre -> right = root;
+                    result.push_back(root -> val);
+                    root = root -> left;
+                } else {
+                    pre -> right = NULL;
+                    root = root -> right;
+                }
+            } else {
+                result.push_back(root -> val);
+                root = root -> right;
+            }
+        }
+        return result;
+    }
+};
