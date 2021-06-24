@@ -1,0 +1,48 @@
+/*
+Given the root of a binary tree, return the inorder traversal of its nodes' values.
+
+Constraints:
+
+The number of nodes in the tree is in the range [0, 100].
+-100 <= Node.val <= 100
+*/
+
+
+
+
+
+/*Recursive*/
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> result;
+        inorder(root, result);
+        return result;
+    }
+    void inorder(TreeNode* root, vector<int>& result){
+        if(!root)
+            return;
+        inorder(root->left, result);
+        result.push_back(root->val);
+        inorder(root->right, result);
+    }
+};
+/*Iterative*/
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> result;
+        stack<TreeNode*> todo;
+        while(root || !todo.empty()){
+            while(root){
+                todo.push(root);
+                root = root->left;
+            }
+            root = todo.top();
+            todo.pop();
+            result.push_back(root->val);
+            root = root->right;            
+        }
+        return result;
+    }
+};
