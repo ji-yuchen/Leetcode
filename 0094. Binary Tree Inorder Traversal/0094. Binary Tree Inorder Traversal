@@ -7,6 +7,11 @@ The number of nodes in the tree is in the range [0, 100].
 -100 <= Node.val <= 100
 */
 
+/*
+Iterative solution using stack: O(n) time and O(n) space;
+Recursive solution: O(n) time and O(n) space (function call stack);
+Morris traversal: O(n) time and O(1) space.
+*/
 
 
 
@@ -42,6 +47,33 @@ public:
             todo.pop();
             result.push_back(root->val);
             root = root->right;            
+        }
+        return result;
+    }
+};
+/*Morris*/
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> result;
+        while(root){
+            if(root->left){
+                TreeNode* pre = root->left;
+                while(pre->right&&pre->right!=root){
+                    pre = pre->right;
+                }
+                if(!pre->right){
+                    pre->right = root;
+                    root = root->left;
+                }else{
+                    pre->right = NULL;
+                    result.push_back(root->val);
+                    root = root->right;
+                }
+            }else{
+                result.push_back(root->val);
+                root=root->right;
+            }
         }
         return result;
     }
