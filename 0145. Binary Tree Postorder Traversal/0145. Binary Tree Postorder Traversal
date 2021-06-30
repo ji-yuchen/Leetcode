@@ -1,0 +1,75 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+ /*Recursive*/
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> result;
+        postorder(root, result);
+        return result;
+    }
+    void postorder(TreeNode* root, vector<int>& result){
+        if(!root)
+            return;
+        postorder(root->left, result);
+        postorder(root->right, result);
+        result.push_back(root->val);
+    }
+};
+/*Reverse, root, right, left, then reverse*/
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        stack <TreeNode *> s;
+        TreeNode *node;
+        vector<int> ans;
+        node=root;
+        while(node || !s.empty()){
+            if(node){
+                s.push(node);
+                ans.push_back(node->val);
+                node=node->right;
+            }else{
+                node=s.top();
+                node=node->left;
+                s.pop();
+            }
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+};
+/*Iterative*/
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> result;
+        stack<TreeNode*> todo;
+        TreeNode* last = NULL;
+        while(root || !todo.empty()){
+            if(root){
+                todo.push(root);
+                root = root->left;
+            }else{
+                TreeNode* node = todo.top();
+                if(node->right&&last!=node->right){
+                    root = node->right;
+                }else{
+                    result.push_back(node->val);
+                    last = node;
+                    todo.pop();
+                }
+            }
+        }
+        return result;
+    }
+};
