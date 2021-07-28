@@ -14,6 +14,8 @@ A binary tree's maximum depth is the number of nodes along the longest path from
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+ 
+ /*DFS*/
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
@@ -26,3 +28,29 @@ public:
 
 };
 
+/*BFS*/
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        int result = 0;
+        if(root == NULL)
+            return result;
+        queue<TreeNode *> q;
+        q.push(root);
+        while(!q.empty()){
+            result++;
+            for(int i = 0, n = q.size(); i < n; i++){
+                TreeNode *p = q.front();
+                q.pop();
+                if(p->left){
+                    q.push(p->left);
+                }
+                if(p->right){
+                    q.push(p->right);
+                }
+            }            
+        }
+        return result;
+    }
+
+};
