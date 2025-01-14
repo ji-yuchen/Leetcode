@@ -28,7 +28,7 @@ public:
         int res = 0;
         for(int i = 0; i < s.size(); ++i){
             if(pos.find(s[i]) != pos.end()){
-                left = max(left, (pos.find(s[i]))->second + 1);
+                left = max(left, (pos.find(s[i]))->second + 1);  //select the larger left_pos between left_pos of current substring and the newly found duplicate char. 
             }
             pos[s[i]] = i;
             int length = i - left + 1;
