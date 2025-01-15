@@ -55,7 +55,7 @@ using std::string;
 class Solution {
 public:
     int myAtoi(string str) {
-        long res = 0;
+        long res = 0;   //using long to avoid errors when res exceeds the boundary
         int sign = 1;
         int i = str.find_first_not_of(' ');
         if(str[i] == '-'){
