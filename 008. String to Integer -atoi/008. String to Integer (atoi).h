@@ -54,20 +54,26 @@ using std::string;
 
 class Solution {
 public:
-    int myAtoi(string str) {
-        long res = 0;   //using long to avoid errors when res exceeds the boundary
+    int myAtoi(string s) {
+        long res = 0;
         int sign = 1;
-        int i = str.find_first_not_of(' ');
-        if(str[i] == '-'){
+        if(s.size()==0){
+            return 0;
+        }
+        int i = s.find_first_not_of(' ');
+        if(i == npos){
+            return 0;            
+        }
+        if(s[i] == '-'){
             sign = -1;
             ++i;
         }
-        else if(str[i] == '+'){
+        else if(s[i] == '+'){
             sign = 1;
             ++i;
         }
-        while(str[i]>='0'&&str[i]<='9'){
-            res = 10*res + str[i++]-'0';
+        while(s[i]>='0'&&s[i]<='9'){
+            res = 10*res + s[i++]-'0';
             if(res*sign>INT_MAX) return INT_MAX;
             if(res*sign<INT_MIN) return INT_MIN;
         }
