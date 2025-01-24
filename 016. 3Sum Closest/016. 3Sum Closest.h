@@ -6,7 +6,7 @@ Given an array nums of n integers and an integer target, find three integers in 
 
 */
 
-//Time complexity: O(N); Space complexity: O(1)
+//Time complexity: O(N^2); Space complexity: O(1)
 
 #include<vector>
 #include<algorithm>
