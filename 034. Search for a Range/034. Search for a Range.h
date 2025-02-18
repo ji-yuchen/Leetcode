@@ -53,7 +53,7 @@ public:
 
 //reference to https://leetcode.com/problems/search-for-a-range/discuss/14699/Clean-iterative-solution-with-two-binary-searches-(with-explanation)
 //Use two binary search to separately locate the left and right target.
-//Time complexity: O(NlogN); Space complexity: O(1)
+//Time complexity: O(logN); Space complexity: O(1)
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
