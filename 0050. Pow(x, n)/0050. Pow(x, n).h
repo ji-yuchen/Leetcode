@@ -40,10 +40,20 @@ public:
         if(x == 0){
             return 0.0;
         }
+
         if(n < 0){
-            n = -n;
+            if (n == INT_MIN) {
+                n = INT_MAX;
+                if(x < 0){
+                    x = -x;
+                }
+            } else {
+                n = -n;
+            }
             x = 1.0/x;
+            
         }
+
         if(n%2==0){
             return 1*myPow(x*x, n/2);
         }else{
