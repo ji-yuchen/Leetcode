@@ -35,5 +35,17 @@ private://At first I use "string& cur", which conflicts the "" used in vector<st
         if(close<open){
             backtrack(res, cur+")", open, close+1, max);
         }
+        /*
+        if(left < n){
+            cur += '(';
+            backTrack(res, cur, left+1, right, n);
+            cur.pop_back();
+        }
+        if(right < left){
+            cur += ')';
+            backTrack(res, cur, left, right+1, n);
+            cur.pop_back();
+        }
+        */
     }
 };
