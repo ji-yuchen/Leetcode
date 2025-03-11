@@ -25,3 +25,23 @@ public:
         return lastpos == 0;
     }
 };
+
+//If we want to go from front to end.... Though this conditional express is a bit unsafe.
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+
+        if(nums.size() <= 1){
+            return true;
+        }
+        int curFarthest = 0;
+        int totalFarthest = nums[0];
+        for(int i = 1; i <= totalFarthest && i < nums.size(); i++){
+            totalFarthest = max(totalFarthest, nums[i]+i);
+        }
+        if(totalFarthest >= (nums.size()-1)){
+            return true;
+        }
+        return false;
+    }
+};
